@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author dp
  */
 @RestController
-@RequestMapping(value = "/carrinho")
+@RequestMapping(value = "/carrinho/clienteAut")
 public class CarrinhoController {
 
     @Autowired

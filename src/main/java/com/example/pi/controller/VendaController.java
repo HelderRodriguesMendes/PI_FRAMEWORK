@@ -38,7 +38,7 @@ public class VendaController {
 
     }
     
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}/admim")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}/admim/admimAut")
     ResponseEntity removerVenda(@PathVariable Long id) {
 
         vendaService.excluirVenda(id);
@@ -46,7 +46,7 @@ public class VendaController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/admim")
+    @RequestMapping(method = RequestMethod.PUT, value = "/admim7admimAut")
     ResponseEntity alterarVenda(@RequestBody Venda venda) {
         
         vendaService.alterarVenda(venda);

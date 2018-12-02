@@ -9,9 +9,6 @@ import com.example.pi.model.Admim;
 import com.example.pi.services.AdmimService;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
-import java.security.Key;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -29,14 +26,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @author helde
  */
 @RestController
-@RequestMapping(value = "/admim")
+@RequestMapping(value = "/admim/admimAut")
 public class AdmimController {
     
     @Autowired
     AdmimService admimService;
-    
-    public final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    
+        
      @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity CadastrarAdmim(@RequestBody Admim adm){
         admimService.cadastraAdmim(adm);
@@ -77,7 +72,7 @@ public class AdmimController {
         JwtBuilder jwtBuilder = Jwts.builder();
         jwtBuilder.claim("admim", true);
         jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + 10 * 60 * 100));
-        jwtBuilder.signWith(key);
+        jwtBuilder.signWith(ClienteController.key);
         
         String token = jwtBuilder.compact();
         

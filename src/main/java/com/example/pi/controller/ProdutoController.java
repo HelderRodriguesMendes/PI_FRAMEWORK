@@ -5,7 +5,6 @@
  */
 package com.example.pi.controller;
 
-import com.example.pi.model.Cliente;
 import com.example.pi.model.Produto;
 import com.example.pi.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ public class ProdutoController {
     ProdutoService produtoService;
 
     @RequestMapping(method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE, value = "/admim" )
+            consumes = MediaType.APPLICATION_JSON_VALUE, value = "/admim/admimAut" )
     ResponseEntity cadastrarProduto(@RequestBody Produto produto) {
 
         produtoService.cadastrarProduto(produto);
@@ -40,7 +39,7 @@ public class ProdutoController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE,
-            value = "/{id}/admim")
+            value = "/{id}/admim/admimAut")
     ResponseEntity removerProduto(@PathVariable Long id) {
 
         produtoService.excluirProduto(id);
@@ -48,7 +47,7 @@ public class ProdutoController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/admim") 
+    @RequestMapping(method = RequestMethod.PUT, value = "/admim/admimAut") 
     ResponseEntity editarProduto(@RequestBody Produto produto) {
         
         produtoService.editarProduto(produto);

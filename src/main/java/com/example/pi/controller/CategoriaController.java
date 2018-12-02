@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author dp
  */
 @RestController
-@RequestMapping(value = "/categoria")
+@RequestMapping(value = "/categoria/admimAut")
 public class CategoriaController {
 
     @Autowired

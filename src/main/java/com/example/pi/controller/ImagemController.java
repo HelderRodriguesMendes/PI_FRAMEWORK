@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author dp
  */
 @RestController
-@RequestMapping(value = "/imagem")
+@RequestMapping(value = "/imagem/admimAut")
 public class ImagemController {
     
     @Autowired

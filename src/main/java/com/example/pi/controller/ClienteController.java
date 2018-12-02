@@ -35,7 +35,7 @@ public class ClienteController {
     @Autowired // informa que essa classe interliga com a ClienteService
     ClienteService clienteService; // com isso n precisa fazer instancia da classe ClienteService
     
-    public final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    public static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     
     @RequestMapping(method = RequestMethod.POST, //RequestMapping: especifica o tipo de HTTP que essa classe vai responde,
             consumes = MediaType.APPLICATION_JSON_VALUE, value = "/cliente")
@@ -84,7 +84,6 @@ public class ClienteController {
         
         JwtBuilder jwtBuilder = Jwts.builder();
         jwtBuilder.setSubject(cliAuten.getNome());
-        //jwtBuilder.claim("admin",true); para quando for fazer a altenticação de admim
         jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + 10 * 60 * 1000));
         jwtBuilder.signWith(key);
         
