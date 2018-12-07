@@ -6,6 +6,7 @@
 package com.example.pi.model;
 
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,7 +29,7 @@ public class Produto {
     private double custo;
     private int quantidade;
     private Collection<Categoria> categoria;
-    private Collection<Imagem> imagem;
+    private List<Imagem> imagem;
 
     /**
      * @return the id
@@ -106,12 +107,7 @@ public class Produto {
      * @return the categoria
      */
     // TESTE
-    @ManyToMany
-    @JoinTable(name = "produto_has_categoria", joinColumns
-            = {
-                @JoinColumn(name = "produto_id")}, inverseJoinColumns
-            = {
-                @JoinColumn(name = "categoria_id")})
+    @ManyToMany()
     public Collection<Categoria> getCategoria() {
         return categoria;
     }
@@ -123,8 +119,8 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    @OneToMany
-    @JoinColumn(name = "id_imagem")
+    @OneToMany()
+    @JoinColumn(name = "id_produto")
     public Collection<Imagem> getImagem() {
         return imagem;
     }
@@ -132,7 +128,7 @@ public class Produto {
     /**
      * @param imagem the imagem to set
      */
-    public void setImagem(Collection<Imagem> imagem) {
+    public void setImagem(List<Imagem> imagem) {
         this.imagem = imagem;
     }
 

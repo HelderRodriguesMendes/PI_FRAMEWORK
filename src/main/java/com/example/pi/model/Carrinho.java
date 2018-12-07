@@ -7,6 +7,7 @@ package com.example.pi.model;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +26,7 @@ import javax.persistence.TemporalType;
 public class Carrinho {
     
     private Long id; 
-    private Collection<Produto> produto;
+   /// private List<ItemCarrinho> itens;
     private Date expireTime;
     private Cliente cli;
 
@@ -37,19 +38,6 @@ public class Carrinho {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    @OneToMany
-    @JoinColumn(name = "produto")
-    public Collection<Produto> getProduto() {
-        return produto;
-    }
-
-    /**
-     * @param produto the produto to set
-     */
-    public void setProduto(Collection<Produto> produto) {
-        this.produto = produto;
     }
 
     @Temporal(TemporalType.DATE)

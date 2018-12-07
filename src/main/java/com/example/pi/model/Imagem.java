@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -19,6 +21,7 @@ public class Imagem {
     
     private Long id;
     private String nome;
+    private Produto produto;
 
     /**
      * @return the id
@@ -48,6 +51,22 @@ public class Imagem {
      */
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    /**
+     * @return the produto
+     */
+    @OneToOne()
+    //@JoinColumn(name = "id_produto")
+    public Produto getProduto() {
+        return produto;
+    }
+
+    /**
+     * @param produto the produto to set
+     */
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
     
     
