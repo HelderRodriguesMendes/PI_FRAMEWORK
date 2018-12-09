@@ -5,7 +5,12 @@
  */
 package com.example.pi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -21,9 +26,8 @@ public class ItemVenda {
     private double valor;
     private Venda venda;
 
-    /**
-     * @return the id
-     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -49,9 +53,7 @@ public class ItemVenda {
         this.custo = custo;
     }
 
-    /**
-     * @return the produto
-     */
+    @ManyToOne
     public Produto getProduto() {
         return produto;
     }
@@ -91,9 +93,8 @@ public class ItemVenda {
         this.valor = valor;
     }
 
-    /**
-     * @return the venda
-     */
+    @JsonIgnore
+    @ManyToOne()
     public Venda getVenda() {
         return venda;
     }

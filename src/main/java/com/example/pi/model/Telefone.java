@@ -5,7 +5,6 @@
  */
 package com.example.pi.model;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,15 +13,10 @@ import javax.persistence.Id;
  *
  * @author helde
  */
-@Entity
-public class Admim {
+public class Telefone {
     private Long id;
-    private String email;
-    private String senha;
+    private long telefone;
 
-    /**
-     * @return the id
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
@@ -37,30 +31,16 @@ public class Admim {
     }
 
     /**
-     * @return the email
+     * @return the telefone
      */
-    public String getEmail() {
-        return email;
+    public long getTelefone() {
+        return telefone;
     }
 
     /**
-     * @param email the email to set
+     * @param telefone the telefone to set
      */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * @return the senha
-     */
-    public String getSenha() {
-        return senha;
-    }
-
-    /**
-     * @param senha the senha to set
-     */
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setTelefone(long telefone) {
+        this.telefone = telefone;
     }
 }

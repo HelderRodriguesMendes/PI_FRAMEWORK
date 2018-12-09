@@ -5,15 +5,17 @@
  */
 package com.example.pi.model;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -26,7 +28,7 @@ public class Venda {
     private Date data;
     private double valor;
     private Cliente cli;
-    private Collection<Produto>produto;
+    private List<ItemVenda>itenVenda;
     
 
     /**
@@ -45,9 +47,7 @@ public class Venda {
         this.id = id;
     }
 
-    /**
-     * @return the data
-     */
+    @Temporal(TemporalType.TIMESTAMP)
     public Date getData() {
         return data;
     }
@@ -74,7 +74,6 @@ public class Venda {
     }
 
     @OneToOne
-    @JoinColumn(name="id_cliente") // cria uma nova coluna na tabela do banco com o nome id_cliente
     public Cliente getCli() {
         return cli;
     }
@@ -85,17 +84,17 @@ public class Venda {
     public void setCli(Cliente cli) {
         this.cli = cli;
     }
-      
-    @ManyToMany
-    //@JoinColumn(name = "id_produto")
-    public Collection<Produto> getProduto() {
-        return produto;
+
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "venda")
+    public List<ItemVenda> getItenVenda() {
+        return itenVenda;
     }
 
     /**
-     * @param produto the produto to set
+     * @param itenVenda the itenVenda to set
      */
-    public void setProduto(Collection<Produto> produto) {
-        this.produto = produto;
+    public void setItenVenda(List<ItemVenda> itenVenda) {
+        this.itenVenda = itenVenda;
     }
+      
 }

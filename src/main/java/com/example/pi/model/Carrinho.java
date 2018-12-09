@@ -5,9 +5,11 @@
  */
 package com.example.pi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,9 +28,10 @@ import javax.persistence.TemporalType;
 public class Carrinho {
     
     private Long id; 
-   /// private List<ItemCarrinho> itens;
-    private Date expireTime;
     private Cliente cli;
+    private List<ItemCarrinho> itens;
+    private Date expireTime;
+    
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,7 +56,8 @@ public class Carrinho {
     }
 
     @OneToOne
-    @JoinColumn(name = "id_cliente")
+    @JsonIgnore
+    @JoinColumn(name = "id_cliente", unique = true)
     public Cliente getCli() {
         return cli;
     }
@@ -63,6 +67,18 @@ public class Carrinho {
      */
     public void setCli(Cliente cli) {
         this.cli = cli;
+    }
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "carrinho")
+    public List<ItemCarrinho> getItens() {
+        return itens;
+    }
+
+    /**
+     * @param itens the itens to set
+     */
+    public void setItens(List<ItemCarrinho> itens) {
+        this.itens = itens;
     }
     
     

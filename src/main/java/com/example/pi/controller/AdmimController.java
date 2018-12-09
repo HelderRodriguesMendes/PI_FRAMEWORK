@@ -65,7 +65,7 @@ public class AdmimController {
     public ResponseEntity Autenticar(@RequestBody Admim adm){
         Admim admAutenti  = admimService.validarAdmim(adm);
         
-        if(admAutenti == null || admAutenti.getNome().equals("") || admAutenti.getSenha().equals("")){
+        if(admAutenti == null || admAutenti.getEmail().equals("") || admAutenti.getSenha().equals("")){
             return new ResponseEntity<>(admAutenti, HttpStatus.FORBIDDEN);
         }
         

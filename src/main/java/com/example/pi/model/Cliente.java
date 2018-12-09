@@ -5,10 +5,14 @@
  */
 package com.example.pi.model;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -19,7 +23,7 @@ public class Cliente {
 
     private Long id;
     private String nome;
-    private String telefone;
+    private List<Telefone> telefones;
     private String email;
     private String senha;
 
@@ -54,20 +58,6 @@ public class Cliente {
     }
 
     /**
-     * @return the telefone
-     */
-    public String getTelefone() {
-        return telefone;
-    }
-
-    /**
-     * @param telefone the telefone to set
-     */
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    /**
      * @return the email
      */
     public String getEmail() {
@@ -93,6 +83,19 @@ public class Cliente {
      */
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = "id_cliente")
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    /**
+     * @param telefones the telefones to set
+     */
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
     }
 
   

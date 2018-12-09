@@ -5,6 +5,7 @@
  */
 package com.example.pi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -39,9 +40,7 @@ public class Imagem {
         this.id = id;
     }
 
-    /**
-     * @return the nome
-     */
+    @JsonIgnore
     public String getNome() {
         return nome;
     }
@@ -56,8 +55,8 @@ public class Imagem {
     /**
      * @return the produto
      */
-    @OneToOne()
-    //@JoinColumn(name = "id_produto")
+    @OneToOne
+    @JsonIgnore
     public Produto getProduto() {
         return produto;
     }

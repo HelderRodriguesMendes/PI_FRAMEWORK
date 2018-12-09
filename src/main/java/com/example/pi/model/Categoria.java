@@ -23,6 +23,16 @@ public class Categoria {
     private String nome;
     private Collection<Produto>produto;
 
+    public Categoria() {
+    }
+
+    public Categoria(Long id, String nome, Collection<Produto> produto) {
+        this.id = id;
+        this.nome = nome;
+        this.produto = produto;
+    }
+    
+
     /**
      * @return the id
      */
@@ -57,7 +67,6 @@ public class Categoria {
      * @return the produto
      */
     @ManyToMany(mappedBy="categoria")
-    //@JoinColumn(name="id_produto")
     public Collection<Produto> getProduto() {
         return produto;
     }

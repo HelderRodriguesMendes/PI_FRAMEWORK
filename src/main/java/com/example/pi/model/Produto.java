@@ -5,14 +5,17 @@
  */
 package com.example.pi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Collection;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -28,7 +31,7 @@ public class Produto {
     private double preco;
     private double custo;
     private int quantidade;
-    private Collection<Categoria> categoria;
+    private List<Categoria> categoria;
     private List<Imagem> imagem;
 
     /**
@@ -75,9 +78,7 @@ public class Produto {
         this.preco = preco;
     }
 
-    /**
-     * @return the custo
-     */
+    @JsonProperty(access = Access.WRITE_ONLY) //Não mostra os custos ao fazer o Serialização
     public double getCusto() {
         return custo;
     }
@@ -108,6 +109,7 @@ public class Produto {
      */
     // TESTE
     @ManyToMany()
+    @JsonIgnore
     public Collection<Categoria> getCategoria() {
         return categoria;
     }
@@ -115,12 +117,12 @@ public class Produto {
     /**
      * @param categoria the categoria to set
      */
-    public void setCategoria(Collection<Categoria> categoria) {
+    public void setCategoria(List<Categoria> categoria) {
         this.categoria = categoria;
     }
 
-    @OneToMany()
-    @JoinColumn(name = "id_produto")
+    @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
+    @JoinColumn(name = "produto_id")
     public Collection<Imagem> getImagem() {
         return imagem;
     }
