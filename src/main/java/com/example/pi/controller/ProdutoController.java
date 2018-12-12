@@ -29,7 +29,7 @@ public class ProdutoController {
     ProdutoService produtoService;
 
     @RequestMapping(method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE, value = "/admim/admimAut" )
+            consumes = MediaType.APPLICATION_JSON_VALUE, value = "/admim" )
     ResponseEntity cadastrarProduto(@RequestBody Produto produto) {
 
         produtoService.cadastrarProduto(produto);
@@ -47,7 +47,7 @@ public class ProdutoController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/admim/admimAut") 
+    @RequestMapping(method = RequestMethod.PUT, value = "/admim") 
     ResponseEntity editarProduto(@RequestBody Produto produto) {
         
         produtoService.editarProduto(produto);

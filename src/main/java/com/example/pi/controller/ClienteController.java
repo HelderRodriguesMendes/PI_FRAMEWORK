@@ -5,8 +5,11 @@
  */
 package com.example.pi.controller;
 
+import com.example.pi.model.Carrinho;
 import com.example.pi.model.Cliente;
+import com.example.pi.services.CarrinhoService;
 import com.example.pi.services.ClienteService;
+import com.example.pi.services.ItemCarrinhoService;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -31,14 +34,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController // especifica que essa classe vai recebe aquisições HTTP
 @RequestMapping(value = "/cliente")
 public class ClienteController {
+    
 
     @Autowired // informa que essa classe interliga com a ClienteService
     ClienteService clienteService; // com isso n precisa fazer instancia da classe ClienteService
     
+    @Autowired
+    CarrinhoService carrinhoService;
+    
+    @Autowired
+    ItemCarrinhoService itemCarrinhoService;
+    
     public static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     
     @RequestMapping(method = RequestMethod.POST, //RequestMapping: especifica o tipo de HTTP que essa classe vai responde,
-            consumes = MediaType.APPLICATION_JSON_VALUE, value = "/cliente")
+            consumes = MediaType.APPLICATION_JSON_VALUE)
     /* nesse caso vai responde a aquisições post(SALVAR), do tipo post */
     ResponseEntity cadastrarCliente(@RequestBody Cliente cli) { //RequestBody: pega o JSON e transforma em objeto
 
@@ -74,24 +84,48 @@ public class ClienteController {
         return new ResponseEntity(cl, HttpStatus.OK);
     }
     
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, 
+            consumes = MediaType.APPLICATION_JSON_VALUE, value = "/autenticar")
     public ResponseEntity autenticar(@RequestBody Cliente cli){
-        Cliente cliAuten = clienteService.validarCliente(cli);
         
+        Cliente cliAuten = clienteService.validarCliente(cli);
+                
         if(cliAuten == null || cliAuten.getNome().equals("") || cliAuten.getSenha().equals("")){
             return new ResponseEntity<>(cliAuten, HttpStatus.FORBIDDEN);
         }
-        
+            Carrinho carri = veriticarCarrinho(cliAuten);
         JwtBuilder jwtBuilder = Jwts.builder();
         jwtBuilder.setSubject(cliAuten.getNome());
+        jwtBuilder.claim("id_cliente", cliAuten.getId());
+        jwtBuilder.claim("id_carrinho", carri.getId());
         jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + 10 * 60 * 1000));
-        jwtBuilder.signWith(key);
+        jwtBuilder.signWith(key); 
         
-        String token = jwtBuilder.compact();
+        String token = jwtBuilder.compact(); 
         
         HttpHeaders hearders = new HttpHeaders();
+        
         hearders.add("Authorization", "Bearer " + token);
         
         return new ResponseEntity<>(hearders, HttpStatus.OK);
+    }
+    
+    public Carrinho veriticarCarrinho(Cliente cliAutent){
+         Carrinho carri = carrinhoService.verificarCarrinhoId_Cli(cliAutent); 
+       
+        if(carri == null){
+            carri = new Carrinho();
+            carri.setCli(cliAutent);
+            carrinhoService.restaurarTempoExpiração(carri);
+            carri = carrinhoService.casdastrarNovoCarrinho(carri);
+        }else{
+            if(carri.getExpireTime().before(new Date(System.currentTimeMillis())) ){ // se a data de expirção for 
+                System.out.println("LIMPAR CARRINHO EXPIRADO");
+                itemCarrinhoService.limparCarrinho(carri);
+               carrinhoService.restaurarTempoExpiração(carri);
+            }
+        }
+        
+        return carri;
     }
 }

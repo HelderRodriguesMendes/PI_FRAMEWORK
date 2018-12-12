@@ -40,7 +40,7 @@ public class IntemVendaController {
 
     }
     
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}/admim/admimAut")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}/admim")
     ResponseEntity removerItemVenda(@PathVariable Long id) {
 
         itemVendaService.excluirItemVenda(id);
@@ -48,7 +48,7 @@ public class IntemVendaController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/admim7admimAut")
+    @RequestMapping(method = RequestMethod.PUT, value = "/admim")
     ResponseEntity alterarItemVenda(@RequestBody ItemVenda itemVenda) {
         
         itemVendaService.alterarItemVenda(itemVenda);

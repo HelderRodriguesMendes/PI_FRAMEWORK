@@ -6,6 +6,7 @@
 package com.example.pi.repository;
 
 import com.example.pi.model.Carrinho;
+import com.example.pi.model.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -13,5 +14,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author dp
  */
 public interface CarrinhoRepository extends JpaRepository<Carrinho, Long>{
-    
+    public Carrinho findByCli (Cliente cli);
 }

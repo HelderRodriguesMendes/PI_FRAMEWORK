@@ -37,5 +37,9 @@ public class ItemCarrinhoService {
     public ItemCarrinho buscaItemCarrinho(Long id) {
         return itemCarrinhoRepository.findById(id).get();
     }
+    
+    public void limparCarrinho(Carrinho carri){
+        itemCarrinhoRepository.deleteByCarrinho(carri);
+    }
 
 }

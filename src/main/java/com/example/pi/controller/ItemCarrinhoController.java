@@ -29,7 +29,7 @@ public class ItemCarrinhoController {
     ItemCarrinhoService itemCarrinhoService;
 
     @RequestMapping(method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE, value = "/admim/admimAut" )
+            consumes = MediaType.APPLICATION_JSON_VALUE, value = "/admim" )
     ResponseEntity cadastrarItemCarrinho(@RequestBody ItemCarrinho itemCarrinho) {
 
         itemCarrinhoService.cadastrarItemCarrinho(itemCarrinho);
@@ -39,7 +39,7 @@ public class ItemCarrinhoController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE,
-            value = "/{id}/admim/admimAut")
+            value = "/{id}/admim")
     ResponseEntity removerItemCarrinho(@PathVariable Long id) {
 
         itemCarrinhoService.excluirItemCarrinho(id);
@@ -47,7 +47,7 @@ public class ItemCarrinhoController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/admim/admimAut") 
+    @RequestMapping(method = RequestMethod.PUT, value = "/admim") 
     ResponseEntity editarItemCarrinho(@RequestBody ItemCarrinho itemCarrinho) {
         
         itemCarrinhoService.editarItemCarrinho(itemCarrinho);

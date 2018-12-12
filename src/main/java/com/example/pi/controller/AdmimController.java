@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author helde
  */
 @RestController
-@RequestMapping(value = "/admim/admimAut")
+@RequestMapping(value = "/admim")
 public class AdmimController {
     
     @Autowired

@@ -5,6 +5,7 @@
  */
 package com.example.pi.model;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
  *
  * @author helde
  */
+@Entity
 public class Telefone {
     private Long id;
     private long telefone;
