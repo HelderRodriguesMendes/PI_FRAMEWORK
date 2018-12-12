@@ -21,7 +21,7 @@ import javax.persistence.OneToOne;
 public class Imagem {
     
     private Long id;
-    private String nome;
+    private String patch;
     private Produto produto;
 
     /**
@@ -41,15 +41,12 @@ public class Imagem {
     }
 
     @JsonIgnore
-    public String getNome() {
-        return nome;
+    public String getPatch() {
+        return patch;
     }
 
-    /**
-     * @param nome the nome to set
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setPatch(String patch) {
+        this.patch = patch;
     }
 
     /**
