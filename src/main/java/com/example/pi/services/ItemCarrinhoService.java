@@ -7,7 +7,7 @@ package com.example.pi.services;
 
 import com.example.pi.model.Carrinho;
 import com.example.pi.model.ItemCarrinho;
-import com.example.pi.repository.CarrinhoRepository;
+import com.example.pi.model.Produto;
 import com.example.pi.repository.ItemCarrinhoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,5 +41,8 @@ public class ItemCarrinhoService {
     public void limparCarrinho(Carrinho carri){
         itemCarrinhoRepository.deleteByCarrinho(carri);
     }
-
+    
+    public ItemCarrinho verificarProdutoNoCarrinho(Carrinho ca, Produto pr){
+        return itemCarrinhoRepository.findByCarrinhoAndProduto(ca, pr);
+    }
 }

@@ -7,6 +7,7 @@ package com.example.pi.repository;
 
 import com.example.pi.model.Carrinho;
 import com.example.pi.model.ItemCarrinho;
+import com.example.pi.model.Produto;
 import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -19,4 +20,6 @@ public interface ItemCarrinhoRepository extends JpaRepository<ItemCarrinho, Long
     @Modifying
     @Transactional
     public void deleteByCarrinho(Carrinho carri);
+    
+    public ItemCarrinho findByCarrinhoAndProduto(Carrinho c, Produto p);
 }
