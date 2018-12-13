@@ -26,29 +26,29 @@ import org.springframework.web.bind.annotation.RestController;
  * @author helde
  */
 @RestController
-@RequestMapping(value = "/admim")
+@RequestMapping(value = "/admin")
 public class AdmimController {
     
     @Autowired
-    AdmimService admimService;
+    AdmimService adminService;
         
      @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity CadastrarAdmim(@RequestBody Admim adm){
-        admimService.cadastraAdmim(adm);
+        adminService.cadastraAdmim(adm);
         
         return new ResponseEntity(HttpStatus.CREATED);
     }
     
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}/admim")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}/admin")
     ResponseEntity removerAdmim(@PathVariable Long id){
-        admimService.excluirAdmim(id);
+        adminService.excluirAdmim(id);
         
         return new ResponseEntity(HttpStatus.OK);
     }
     
     @RequestMapping(method = RequestMethod.PUT)
     ResponseEntity editarAdmim(@RequestBody Admim id){
-        admimService.editarAdmim(id);
+        adminService.editarAdmim(id);
         
         return new ResponseEntity(HttpStatus.OK);
     }
@@ -56,21 +56,21 @@ public class AdmimController {
     @RequestMapping(method = RequestMethod.GET, value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity mostrarAdmim(@PathVariable Long id){
         
-        Admim adm = admimService.bauscarAdmim(id);
+        Admim adm = adminService.bauscarAdmim(id);
         
         return new ResponseEntity(adm, HttpStatus.OK);
     }
     
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, value = "/autenticar")
     public ResponseEntity Autenticar(@RequestBody Admim adm){
-        Admim admAutenti  = admimService.validarAdmim(adm);
+        Admim admAutenti  = adminService.validarAdmim(adm);
         
         if(admAutenti == null || admAutenti.getEmail().equals("") || admAutenti.getSenha().equals("")){
             return new ResponseEntity<>(admAutenti, HttpStatus.FORBIDDEN);
         }
         
         JwtBuilder jwtBuilder = Jwts.builder();
-        jwtBuilder.claim("admim", true);
+        jwtBuilder.claim("admin", true);
         jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + 10 * 60 * 100));
         jwtBuilder.signWith(ClienteController.key);
         

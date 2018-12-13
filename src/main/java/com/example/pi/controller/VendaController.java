@@ -44,7 +44,7 @@ public class VendaController {
     ItemCarrinhoService itemCarrinhoService;
     
     @RequestMapping(method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE, value = "/admim")
+            consumes = MediaType.APPLICATION_JSON_VALUE, value = "/admin")
     ResponseEntity cadastrarVenda(@RequestBody Venda venda) {
 
         vendaService.cadastrarVenda(venda);
@@ -53,7 +53,7 @@ public class VendaController {
 
     }
     
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}/admim")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}/admin")
     ResponseEntity removerVenda(@PathVariable Long id) {
 
         vendaService.excluirVenda(id);
@@ -61,7 +61,7 @@ public class VendaController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/admim")
+    @RequestMapping(method = RequestMethod.PUT, value = "/admin")
     ResponseEntity alterarVenda(@RequestBody Venda venda) {
         
         vendaService.alterarVenda(venda);

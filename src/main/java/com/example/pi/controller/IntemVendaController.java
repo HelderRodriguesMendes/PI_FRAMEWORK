@@ -31,7 +31,7 @@ public class IntemVendaController {
     ItemVendaService itemVendaService;
     
     @RequestMapping(method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE, value = "/admim")
+            consumes = MediaType.APPLICATION_JSON_VALUE, value = "/admin")
     ResponseEntity cadastrarItemVenda(@RequestBody ItemVenda itemVenda) {
 
         itemVendaService.cadastrarItemVenda(itemVenda);
@@ -40,7 +40,7 @@ public class IntemVendaController {
 
     }
     
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}/admim")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}/admin")
     ResponseEntity removerItemVenda(@PathVariable Long id) {
 
         itemVendaService.excluirItemVenda(id);
@@ -48,7 +48,7 @@ public class IntemVendaController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/admim")
+    @RequestMapping(method = RequestMethod.PUT, value = "/admin")
     ResponseEntity alterarItemVenda(@RequestBody ItemVenda itemVenda) {
         
         itemVendaService.alterarItemVenda(itemVenda);

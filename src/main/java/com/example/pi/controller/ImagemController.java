@@ -35,7 +35,7 @@ public class ImagemController {
     @Autowired
     ImagemService imagemService;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/admim/{id}")
+    @RequestMapping(method = RequestMethod.POST, value = "/admin/{id}")
     public ResponseEntity cadastrar(@PathVariable Long id, @RequestPart(value = "file", required = false)
     MultipartFile[] files) {
         

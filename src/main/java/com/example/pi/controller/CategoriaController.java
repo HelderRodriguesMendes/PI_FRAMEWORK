@@ -22,14 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @author dp
  */
 @RestController
-@RequestMapping(value = "/categoria/admimAut")
+@RequestMapping(value = "/categoria/adminAut")
 public class CategoriaController {
 
     @Autowired
     CategoriaService categoriaService;
 
     @RequestMapping(method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE, value = "/admim")
+            consumes = MediaType.APPLICATION_JSON_VALUE, value = "/admin")
     ResponseEntity cadastrarCategoria(@RequestBody Categoria categoria) {
 
         categoriaService.cadastrarCategoria(categoria);
@@ -39,7 +39,7 @@ public class CategoriaController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE,
-            value = "/{id}/admim")
+            value = "/{id}/admin")
     ResponseEntity removerCategoria(@PathVariable Long id) {
 
         categoriaService.excluirCategoria(id);
@@ -47,7 +47,7 @@ public class CategoriaController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/admim")
+    @RequestMapping(method = RequestMethod.PUT, value = "/admin")
     ResponseEntity editarCategoria(@RequestBody Categoria categoria) {
 
         categoriaService.editarCategoria(categoria);
