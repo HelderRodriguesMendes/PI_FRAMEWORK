@@ -39,7 +39,7 @@ public class ItemCarrinhoController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE,
-            value = "/{id}/admin")
+            value = "/admin/{id}")
     ResponseEntity removerItemCarrinho(@PathVariable Long id) {
 
         itemCarrinhoService.excluirItemCarrinho(id);

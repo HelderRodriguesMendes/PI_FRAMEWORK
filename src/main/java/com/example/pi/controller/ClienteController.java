@@ -59,7 +59,7 @@ public class ClienteController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE,
-            value = "/{id}/admim")
+            value = "/admim/{id}")
     ResponseEntity removerCliente(@PathVariable Long id) {
 
         clienteService.excluirCliente(id);

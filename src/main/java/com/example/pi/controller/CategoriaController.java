@@ -39,7 +39,7 @@ public class CategoriaController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE,
-            value = "/{id}/admin")
+            value = "/admin/{id}")
     ResponseEntity removerCategoria(@PathVariable Long id) {
 
         categoriaService.excluirCategoria(id);

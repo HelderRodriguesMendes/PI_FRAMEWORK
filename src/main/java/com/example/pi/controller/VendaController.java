@@ -58,7 +58,7 @@ public class VendaController {
 
     }
     
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}/admin")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/admin/{id}")
     ResponseEntity removerVenda(@PathVariable Long id) {
 
         vendaService.excluirVenda(id);

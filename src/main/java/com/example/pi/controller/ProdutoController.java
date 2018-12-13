@@ -39,7 +39,7 @@ public class ProdutoController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE,
-            value = "/{id}/admin")
+            value = "/admin/{id}")
     ResponseEntity removerProduto(@PathVariable Long id) {
 
         produtoService.excluirProduto(id);
