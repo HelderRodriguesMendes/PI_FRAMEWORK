@@ -39,7 +39,7 @@ public class ProdutoController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE,
-            value = "/{id}/admin/adminAut")
+            value = "/{id}/admin")
     ResponseEntity removerProduto(@PathVariable Long id) {
 
         produtoService.excluirProduto(id);
@@ -47,7 +47,7 @@ public class ProdutoController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/admin") 
+    @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, value = "/admin") 
     ResponseEntity editarProduto(@RequestBody Produto produto) {
         
         produtoService.editarProduto(produto);

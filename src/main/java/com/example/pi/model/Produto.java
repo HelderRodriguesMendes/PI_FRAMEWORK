@@ -30,7 +30,7 @@ public class Produto {
     private String nome;
     private double preco;
     private double custo;
-    private int quantidade;
+    private double quantidade;
     private List<Categoria> categoria;
     private List<Imagem> imagem;
 
@@ -93,14 +93,14 @@ public class Produto {
     /**
      * @return the quantidade
      */
-    public int getQuantidade() {
+    public double getQuantidade() {
         return quantidade;
     }
 
     /**
      * @param quantidade the quantidade to set
      */
-    public void setQuantidade(int quantidade) {
+    public void setQuantidade(double quantidade) {
         this.quantidade = quantidade;
     }
 

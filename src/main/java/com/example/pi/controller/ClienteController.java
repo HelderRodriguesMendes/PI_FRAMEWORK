@@ -45,7 +45,7 @@ public class ClienteController {
     @Autowired
     ItemCarrinhoService itemCarrinhoService;
     
-    public static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    
     
     @RequestMapping(method = RequestMethod.POST, //RequestMapping: especifica o tipo de HTTP que essa classe vai responde,
             consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -99,7 +99,7 @@ public class ClienteController {
         jwtBuilder.claim("id_cliente", cliAuten.getId());
         jwtBuilder.claim("id_carrinho", carri.getId());
         jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + 10 * 60 * 1000));
-        jwtBuilder.signWith(key); 
+        jwtBuilder.signWith(ClienteService.key); 
         
         String token = jwtBuilder.compact(); 
         

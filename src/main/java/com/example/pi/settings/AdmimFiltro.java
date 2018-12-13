@@ -5,6 +5,7 @@
  */
 package com.example.pi.settings;
 
+import com.example.pi.services.AdmimService;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -24,7 +25,7 @@ import org.springframework.web.filter.GenericFilterBean;
  */
 public class AdmimFiltro extends GenericFilterBean{
     
-    public final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    
 
     @Override
     public void doFilter(ServletRequest sr, ServletResponse sr1, FilterChain fc) throws IOException, ServletException {
@@ -38,7 +39,7 @@ public class AdmimFiltro extends GenericFilterBean{
         String token = header.substring(7);
         
         try{
-            Jwts.parser().setSigningKey(key).parseClaimsJws(token);
+            Jwts.parser().setSigningKey(AdmimService.key).parseClaimsJws(token);
         }catch(JwtException e){
             throw new ServletException(e);
         }

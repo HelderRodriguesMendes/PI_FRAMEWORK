@@ -7,6 +7,9 @@ package com.example.pi.services;
 
 import com.example.pi.model.Produto;
 import com.example.pi.repository.ProdutoRepository;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+import java.security.Key;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

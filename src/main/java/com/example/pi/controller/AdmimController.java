@@ -31,35 +31,7 @@ public class AdmimController {
     
     @Autowired
     AdmimService adminService;
-        
-     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity CadastrarAdmim(@RequestBody Admim adm){
-        adminService.cadastraAdmim(adm);
-        
-        return new ResponseEntity(HttpStatus.CREATED);
-    }
-    
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}/admin")
-    ResponseEntity removerAdmim(@PathVariable Long id){
-        adminService.excluirAdmim(id);
-        
-        return new ResponseEntity(HttpStatus.OK);
-    }
-    
-    @RequestMapping(method = RequestMethod.PUT)
-    ResponseEntity editarAdmim(@RequestBody Admim id){
-        adminService.editarAdmim(id);
-        
-        return new ResponseEntity(HttpStatus.OK);
-    }
-    
-    @RequestMapping(method = RequestMethod.GET, value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity mostrarAdmim(@PathVariable Long id){
-        
-        Admim adm = adminService.bauscarAdmim(id);
-        
-        return new ResponseEntity(adm, HttpStatus.OK);
-    }
+         
     
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, value = "/autenticar")
     public ResponseEntity Autenticar(@RequestBody Admim adm){
@@ -72,7 +44,7 @@ public class AdmimController {
         JwtBuilder jwtBuilder = Jwts.builder();
         jwtBuilder.claim("admin", true);
         jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + 10 * 60 * 100));
-        jwtBuilder.signWith(ClienteController.key);
+        jwtBuilder.signWith(adminService.key);
         
         String token = jwtBuilder.compact();
         

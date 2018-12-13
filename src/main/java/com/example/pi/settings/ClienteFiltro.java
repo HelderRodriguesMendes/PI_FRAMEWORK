@@ -5,7 +5,7 @@
  */
 package com.example.pi.settings;
 
-import com.example.pi.controller.ClienteController;
+import com.example.pi.services.ClienteService;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import java.io.IOException;
@@ -34,7 +34,7 @@ public class ClienteFiltro extends GenericFilterBean{
         String token = header.substring(7);
         
         try{
-            Jwts.parser().setSigningKey(ClienteController.key).parseClaimsJws(token);
+            Jwts.parser().setSigningKey(ClienteService.key).parseClaimsJws(token);
         }catch(JwtException e){
             throw new ServletException(e);
         }

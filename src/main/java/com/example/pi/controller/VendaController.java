@@ -8,9 +8,11 @@ package com.example.pi.controller;
 import com.example.pi.model.Carrinho;
 import com.example.pi.model.ItemCarrinho;
 import com.example.pi.model.ItemVenda;
+import com.example.pi.model.Produto;
 import com.example.pi.model.Venda;
 import com.example.pi.services.CarrinhoService;
 import com.example.pi.services.ItemCarrinhoService;
+import com.example.pi.services.ProdutoService;
 import com.example.pi.services.VendaService;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,6 +44,9 @@ public class VendaController {
 
     @Autowired
     ItemCarrinhoService itemCarrinhoService;
+    
+    @Autowired
+    ProdutoService produtoService;
     
     @RequestMapping(method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE, value = "/admin")
@@ -101,6 +106,10 @@ public class VendaController {
             iv.setVenda(venda);
             listaItens.add(iv); 
             total += iv.getValor() * iv.getQuantidade();
+            
+            Produto pro = produtoService.buscaProduto(iv.getProduto().getId());
+            pro.setQuantidade(pro.getQuantidade() - iv.getQuantidade());
+            produtoService.cadastrarProduto(pro);
         }
         venda.setItenVenda(listaItens);
         venda.setValor(total);
