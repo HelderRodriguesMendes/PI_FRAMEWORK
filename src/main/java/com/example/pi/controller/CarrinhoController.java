@@ -62,15 +62,41 @@ public class CarrinhoController {
         return new ResponseEntity(HttpStatus.OK);
 
     }
+    
+    
+    
+    
+    
+    
+    
+    
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Carrinho> mostraCarrinho(@PathVariable Long id) {
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Carrinho> mostraCarrinho(@RequestHeader HttpHeaders headrs) {
+        long id;
+        try {
+             id = (carrinhoService.carrinhoToken(headrs));
+        } catch (Exception ex) {
+            return new ResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
         Carrinho car = carrinhoService.buscaCrrinho(id);
 
         return new ResponseEntity(car, HttpStatus.OK);
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity adicionarProdutoNoCarrinho(@RequestBody Produto pro, @RequestHeader HttpHeaders headrs) {
         Carrinho carri;
