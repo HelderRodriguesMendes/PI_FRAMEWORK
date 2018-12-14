@@ -9,6 +9,7 @@ import com.example.pi.model.Carrinho;
 import com.example.pi.model.ItemCarrinho;
 import com.example.pi.model.Produto;
 import com.example.pi.repository.ItemCarrinhoRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,5 +45,9 @@ public class ItemCarrinhoService {
     
     public ItemCarrinho verificarProdutoNoCarrinho(Carrinho ca, Produto pr){
         return itemCarrinhoRepository.findByCarrinhoAndProduto(ca, pr);
+    }
+
+    public List<ItemCarrinho> buscaItensCarrinho() {
+        return itemCarrinhoRepository.findAll();
     }
 }

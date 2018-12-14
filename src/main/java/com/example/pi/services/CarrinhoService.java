@@ -13,6 +13,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -43,6 +44,7 @@ public class CarrinhoService {
     }
     
     public Carrinho buscaCrrinho(Long id) {
+        
         return carrinhoRepository.findById(id).get();
     }
     
@@ -83,6 +85,10 @@ public class CarrinhoService {
         }
 
         return id;
+    }
+
+    public List<Carrinho> buscaTudoCarrinho() {
+        return carrinhoRepository.findAll();
     }
     
 }

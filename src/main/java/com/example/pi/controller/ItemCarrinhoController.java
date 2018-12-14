@@ -7,6 +7,7 @@ package com.example.pi.controller;
 
 import com.example.pi.model.ItemCarrinho;
 import com.example.pi.services.ItemCarrinhoService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author dp
  */
 @RestController
-@RequestMapping(value = "itemCarrinhoController")
+@RequestMapping(value = "/itemCarrinho")
 public class ItemCarrinhoController {
     
     @Autowired

@@ -10,6 +10,7 @@ import com.example.pi.repository.ProdutoRepository;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import java.security.Key;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,10 @@ public class ProdutoService {
 
     public Produto buscaProduto(Long id) {
         return produtoRepository.findById(id).get();
+    }
+    
+    public List<Produto> buscaTodosProduto() {
+        return produtoRepository.findAll();
     }
 
 }

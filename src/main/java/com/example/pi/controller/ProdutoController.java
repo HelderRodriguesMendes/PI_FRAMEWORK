@@ -7,6 +7,7 @@ package com.example.pi.controller;
 
 import com.example.pi.model.Produto;
 import com.example.pi.services.ProdutoService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -62,6 +63,14 @@ public class ProdutoController {
         Produto pr = produtoService.buscaProduto(id);
         
         return new ResponseEntity(pr, HttpStatus.OK);
+    }
+    
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Produto> mostraTodosProduto() {
+        
+        List<Produto> produto = produtoService.buscaTodosProduto();
+        
+        return new ResponseEntity(produto, HttpStatus.OK);
     }
     
 }
