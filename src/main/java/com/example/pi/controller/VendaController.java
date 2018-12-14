@@ -114,6 +114,7 @@ public class VendaController {
         venda.setItenVenda(listaItens);
         venda.setValor(total);
         venda.setData(new Date());
+        venda.setCli(car.getCli());
         vendaService.cadastrarVenda(venda);
         itemCarrinhoService.limparCarrinho(car);
         
